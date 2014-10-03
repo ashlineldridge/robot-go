@@ -1,12 +1,12 @@
 package main
 
-import "fmt"
+const (
+	tableWidth  int = 5
+	tableHeight int = 5
+)
 
 func main() {
-	r := Position{x: 1, y: 1, d: North}
-	fmt.Println(r)
-
-	p := Position{x: 1, y: 1, d: 3}
-	t := Table{width: 5, height: 5}
-	fmt.Println(t.IsValid(&p))
+	t := Table{width: tableWidth, height: tableHeight}
+	r := NewRobot(&t)
+	r.Report()
 }

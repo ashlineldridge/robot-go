@@ -7,6 +7,7 @@ const (
 	East
 	South
 	West
+	Invalid
 )
 
 var directions = map[Direction]string{
@@ -14,6 +15,15 @@ var directions = map[Direction]string{
 	East:  "EAST",
 	South: "SOUTH",
 	West:  "WEST",
+}
+
+func NewDirection(s string) Direction {
+	for k, v := range directions {
+		if v == s {
+			return k
+		}
+	}
+	return Invalid
 }
 
 func (d Direction) String() string {
