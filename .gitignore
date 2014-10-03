@@ -3,3 +3,4 @@ pkg/
 *.backup
 *.log
 *.bak
+*.swp
