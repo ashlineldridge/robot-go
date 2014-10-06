@@ -27,7 +27,7 @@ func TestNewDirection(t *testing.T) {
 	assert.Equal(t, Invalid, NewDirection("FOOBAR"), "Invalid direction was not detected.")
 }
 
-func TestRotation(t *testing.T) {
+func TestDirectionRotation(t *testing.T) {
 	assert.Equal(t, East, North.Rotate(1), "North rotated by 1 should be East")
 	assert.Equal(t, South, East.Rotate(1), "East rotated by 1 should be South")
 	assert.Equal(t, West, South.Rotate(1), "South rotated by 1 should be West")
@@ -38,6 +38,6 @@ func TestRotation(t *testing.T) {
 	assert.Equal(t, East, South.Rotate(-1), "South rotated by -1 should be West")
 	assert.Equal(t, North, East.Rotate(-1), "West rotated by -1 should be North")
 
-	assert.Equal(t, North, East.Rotate(4), "North rotated by 4 should be North")
-	assert.Equal(t, North, East.Rotate(-4), "North rotated by -4 should be North")
+	assert.Equal(t, North, North.Rotate(4), "North rotated by 4 should be North")
+	assert.Equal(t, North, North.Rotate(-4), "North rotated by -4 should be North")
 }
