@@ -1,13 +1,17 @@
-package main
+package robot
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/ashlineldridge/robot-go/table"
+)
 
 type Robot struct {
-	position *Position
-	table    Table
+	position *table.Position
+	table    table.Table
 }
 
-func NewRobot(table Table) Robot {
+func NewRobot(table table.Table) Robot {
 	return Robot{position: nil, table: table}
 }
 
@@ -17,10 +21,10 @@ func (r *Robot) Report() {
 	}
 }
 
-func (r *Robot) Place(p Position) {
+func (r *Robot) Place(p table.Position) {
 	if r.table.IsValid(p) {
 		if r.position == nil {
-			r.position = new(Position)
+			r.position = new(table.Position)
 		}
 		*r.position = p
 	}

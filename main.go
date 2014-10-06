@@ -1,14 +1,19 @@
 package main
 
+import (
+	"github.com/ashlineldridge/robot-go/robot"
+	"github.com/ashlineldridge/robot-go/table"
+)
+
 const (
 	tableWidth  int = 5
 	tableHeight int = 5
 )
 
 func main() {
-	t := Table{width: tableWidth, height: tableHeight}
-	r := NewRobot(t)
+	t := table.Table{Width: tableWidth, Height: tableHeight}
+	r := robot.NewRobot(t)
 	r.Report()
-	r.Place(Position{x: 1, y: 1, d: East})
+	r.Place(table.Position{X: 1, Y: 1, D: table.East})
 	r.Report()
 }
