@@ -14,6 +14,8 @@ func main() {
 	t := table.Table{Width: tableWidth, Height: tableHeight}
 	r := robot.NewRobot(t)
 	r.Report()
-	r.Place(&table.Position{X: 1, Y: 1, D: table.East})
+	r.Place(&table.Position{X: 1, Y: 1, D: table.North})
+	r.Report()
+	r.Move()
 	r.Report()
 }

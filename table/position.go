@@ -15,3 +15,7 @@ func (p *Position) String() string {
 func (p *Position) Rotate(delta int) Position {
 	return Position{X: p.X, Y: p.Y, D: p.D.Rotate(delta)}
 }
+
+func (p *Position) Add(xDelta, yDelta int) Position {
+	return Position{X: p.X + xDelta, Y: p.Y + yDelta, D: p.D}
+}
