@@ -5,6 +5,6 @@ type Table struct {
 	height int
 }
 
-func (t Table) IsValid(p *Position) bool {
+func (t Table) IsValid(p Position) bool {
 	return p.x >= 0 && p.x < t.width && p.y >= 0 && p.y < t.height && p.d.IsValid()
 }

@@ -34,3 +34,8 @@ func (d Direction) IsValid() bool {
 	_, ok := directions[d]
 	return ok
 }
+
+func (d Direction) Rotate(delta int) Direction {
+	const count int = 4
+	return Direction((int(d) + delta + count) % count)
+}
