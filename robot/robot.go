@@ -21,23 +21,26 @@ func (r *Robot) Report() {
 	}
 }
 
-func (r *Robot) Place(p table.Position) {
+func (r *Robot) Place(p *table.Position) *table.Position {
 	if r.table.IsValid(p) {
 		if r.position == nil {
 			r.position = new(table.Position)
 		}
-		*r.position = p
+		*r.position = *p
 	}
+	return r.position
 }
 
-func (r *Robot) Left() {
+func (r *Robot) Left() *table.Position {
 	if r.position != nil {
 		*r.position = r.position.Rotate(-1)
 	}
+	return r.position
 }
 
-func (r *Robot) Right() {
+func (r *Robot) Right() *table.Position {
 	if r.position != nil {
 		*r.position = r.position.Rotate(1)
 	}
+	return r.position
 }
