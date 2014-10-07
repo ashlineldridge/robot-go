@@ -41,5 +41,6 @@ func TestApplication(t *testing.T) {
 
 	// Run the robot against the sample input file and check that its output is as expected.
 	processInput(&robot, inputReader)
-	assert.Equal(t, expectedOutput, outputBuffer.String())
+	assert.Equal(t, expectedOutput, outputBuffer.String(),
+		"The robot's output was did not match the expected test_resources/output.txt file.")
 }

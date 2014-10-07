@@ -64,7 +64,6 @@ func (r *Robot) Move() *table.Position {
 
 func (r *Robot) Report() {
 	if r.position != nil {
-		//fmt.Println(r.position)
 		fmt.Fprintln(r.writer, r.position)
 	}
 }
