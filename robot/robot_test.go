@@ -1,6 +1,7 @@
 package robot
 
 import (
+	"os"
 	"testing"
 
 	"github.com/ashlineldridge/robot-go/table"
@@ -9,7 +10,7 @@ import (
 )
 
 func TestRobotPlaceValid(t *testing.T) {
-	r := NewRobot(table.Table{Width: 5, Height: 5})
+	r := NewRobot(table.Table{Width: 5, Height: 5}, os.Stdout)
 
 	bottomLeft := table.Position{0, 0, table.North}
 	assert.Equal(t, *r.Place(&bottomLeft), bottomLeft, "{0,0,North} should be valid.")
@@ -25,7 +26,7 @@ func TestRobotPlaceValid(t *testing.T) {
 }
 
 func TestRobotPlaceInvalid(t *testing.T) {
-	r := NewRobot(table.Table{Width: 5, Height: 5})
+	r := NewRobot(table.Table{Width: 5, Height: 5}, os.Stdout)
 
 	outOfBounds := table.Position{-1, -1, table.North}
 	assert.Nil(t, r.Place(&outOfBounds), "{-1,-1,North} should not be valid.")
@@ -41,7 +42,7 @@ func TestRobotPlaceInvalid(t *testing.T) {
 }
 
 func TestRobotRotation(t *testing.T) {
-	r := NewRobot(table.Table{Width: 5, Height: 5})
+	r := NewRobot(table.Table{Width: 5, Height: 5}, os.Stdout)
 	r.Place(&table.Position{0, 0, table.North})
 
 	assert.Equal(t, r.Right().D, table.East, "Robot should be facing East")
@@ -56,7 +57,7 @@ func TestRobotRotation(t *testing.T) {
 }
 
 func TestRobotMove(t *testing.T) {
-	r := NewRobot(table.Table{Width: 5, Height: 5})
+	r := NewRobot(table.Table{Width: 5, Height: 5}, os.Stdout)
 	r.Place(&table.Position{0, 0, table.North})
 
 	// Move the robot to the top left corner

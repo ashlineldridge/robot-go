@@ -17,7 +17,7 @@ const (
 
 func main() {
 	table := table.Table{Width: tableWidth, Height: tableHeight}
-	robot := robot.NewRobot(table)
+	robot := robot.NewRobot(table, os.Stdout)
 	processInput(&robot, os.Stdin)
 }
 

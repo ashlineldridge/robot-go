@@ -4,3 +4,4 @@ pkg/
 *.log
 *.bak
 *.swp
+robot-go

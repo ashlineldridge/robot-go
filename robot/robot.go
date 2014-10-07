@@ -2,6 +2,7 @@ package robot
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/ashlineldridge/robot-go/table"
 )
@@ -9,10 +10,11 @@ import (
 type Robot struct {
 	position *table.Position
 	table    table.Table
+	writer   io.Writer
 }
 
-func NewRobot(table table.Table) Robot {
-	return Robot{position: nil, table: table}
+func NewRobot(table table.Table, writer io.Writer) Robot {
+	return Robot{position: nil, table: table, writer: writer}
 }
 
 func (r *Robot) Place(p *table.Position) *table.Position {
@@ -62,6 +64,7 @@ func (r *Robot) Move() *table.Position {
 
 func (r *Robot) Report() {
 	if r.position != nil {
-		fmt.Println(r.position)
+		//fmt.Println(r.position)
+		fmt.Fprintln(r.writer, r.position)
 	}
 }
