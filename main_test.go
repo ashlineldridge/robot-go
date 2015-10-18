@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"io/ioutil"
 	"os"
 	"testing"
 
@@ -28,11 +29,11 @@ func TestApplication(t *testing.T) {
 	}()
 
 	// Read the expected output into a string.
-	b, err := ioutil.readfile("test_resources/output.txt")
+	b, err := ioutil.ReadFile("test_resources/output.txt")
 	if err != nil {
 		panic(err)
 	}
-	expectedoutput := string(b)
+	expectedOutput := string(b)
 
 	// Create the robot with a buffered writer so we can test its output.
 	table := table.Table{Width: tableWidth, Height: tableHeight}
