@@ -2,46 +2,33 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
-	"io"
 	"os"
-
-	"github.com/ashlineldridge/robot-go/robot"
-	"github.com/ashlineldridge/robot-go/table"
+	"strings"
 )
 
-const (
-	tableWidth  int = 5
-	tableHeight int = 5
-)
+var sim = Simulation{Table: Table{Width: 5, Height: 5}}
 
 func main() {
-	table := table.Table{Width: tableWidth, Height: tableHeight}
-	robot := robot.NewRobot(table, os.Stdout)
-	processInput(&robot, os.Stdin)
-}
-
-func processInput(robot *robot.Robot, reader io.Reader) {
-	scanner := bufio.NewScanner(reader)
-	for scanner.Scan() {
-		executeCommand(robot, scanner.Text())
+	flag.Parse()
+	var scanner *bufio.Scanner
+	switch flag.NArg() {
+	case 0:
+		println("Reading instructions from stdin")
+		scanner = bufio.NewScanner(os.Stdin)
+	case 1:
+		fmt.Printf("Reading instructions from file %v", flag.Arg(0))
+		f, err := os.Open(flag.Arg(0))
+		defer f.Close()
+		Check(err, "Error opening file %v", flag.Arg(0))
+		scanner = bufio.NewScanner(bufio.NewReader(f))
+	default:
+		println("Incorrect usage")
+		os.Exit(1)
 	}
-}
-
-func executeCommand(robot *robot.Robot, command string) {
-	var instruction, d string
-	var x, y int
-	fmt.Sscanf(command, "%s %d,%d,%s\n", &instruction, &x, &y, &d)
-	switch instruction {
-	case "PLACE":
-		robot.Place(&table.Position{X: x, Y: y, D: table.NewDirection(d)})
-	case "MOVE":
-		robot.Move()
-	case "LEFT":
-		robot.Left()
-	case "RIGHT":
-		robot.Right()
-	case "REPORT":
-		robot.Report()
+	for scanner.Scan() {
+		cmd := strings.ToUpper(strings.TrimSpace(scanner.Text()))
+		ParseCommand(cmd)(&sim)
 	}
 }
